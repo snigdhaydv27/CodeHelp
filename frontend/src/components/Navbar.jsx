@@ -208,8 +208,8 @@ function NavBar() {
             <div className="flex items-center space-x-3 group">
               <Link href="/" className="flex items-center" onClick={closeMenu}>
                 <img
-                  src={isDark ? "/omex-logo-white.svg" : "/omex-favicon.svg"}
-                  alt="Omex AI"
+                  src={isDark ? "/CodeHelp-logo-white.svg" : "/CodeHelp-favicon.svg"}
+                  alt="CodeHelp AI"
                   className={` ${
                     isDark ? "h-13 sm:h-16" : "h-9 sm:h-12"
                   }  w-auto transition-transform duration-300 transform group-hover:scale-110 ml-2`}
@@ -219,7 +219,7 @@ function NavBar() {
                     isDark ? "text-gray-50" : "text-blue-600 ml-2"
                   } font-semibold`}
                 >
-                  Omex
+                  CodeHelp
                 </h1>
               </Link>
             </div> 
@@ -628,9 +628,9 @@ function NavBar() {
             <Link href="/" className="flex items-center" onClick={closeMenu}>
               <img
                 src={
-                  isDark ? "/omex-text-logo-white.svg" : "/omex-text-logo.svg"
+                  isDark ? "/CodeHelp-text-logo-white.svg" : "/CodeHelp-text-logo.svg"
                 }
-                alt="Omex AI"
+                alt="CodeHelp AI"
                 className="h-10 w-auto transition-transform duration-300 transform group-hover:scale-110"
               />
             </Link>
