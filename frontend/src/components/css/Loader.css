@@ -1,0 +1,293 @@
+/* Loader.css - Advanced animations for the loader component */
+
+/* Container animations */
+.loader-container {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Outer ring rotation */
+.loader-ring-outer {
+  animation: rotate-slow 8s linear infinite;
+}
+
+.loader-ring-middle {
+  animation: rotate-reverse 6s linear infinite;
+}
+
+@keyframes rotate-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes rotate-reverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+/* Particle orbit animation */
+.loader-particle-orbit {
+  animation: orbit 4s linear infinite;
+}
+
+@keyframes orbit {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Individual particle pulse */
+.loader-particle {
+  animation: particle-pulse 1s ease-in-out infinite;
+}
+
+@keyframes particle-pulse {
+  0%, 100% { 
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% { 
+    transform: scale(1.5);
+    opacity: 1;
+  }
+}
+
+/* Main spinner morph animation */
+.loader-morph {
+  animation: morph 2s ease-in-out infinite;
+}
+
+@keyframes morph {
+  0%, 100% { 
+    transform: scale(1) rotate(0deg);
+  }
+  25% { 
+    transform: scale(1.05) rotate(90deg);
+  }
+  50% { 
+    transform: scale(0.95) rotate(180deg);
+  }
+  75% { 
+    transform: scale(1.05) rotate(270deg);
+  }
+}
+
+/* Glow pulse */
+.loader-glow {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { 
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  50% { 
+    opacity: 0.6;
+    transform: scale(1.2);
+  }
+}
+
+/* Main spin animation */
+.loader-spin-main {
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Morph path animation */
+.loader-morph-path {
+  animation: path-morph 3s ease-in-out infinite;
+}
+
+@keyframes path-morph {
+  0%, 100% { 
+    d: path("M50,10 L80,40 L80,60 L50,90 L20,60 L20,40 Z");
+  }
+  50% { 
+    d: path("M50,15 L75,35 L85,65 L50,85 L15,65 L25,35 Z");
+  }
+}
+
+/* Inner circle rotation */
+.loader-inner-circle {
+  animation: inner-rotate 3s linear infinite reverse;
+  transform-origin: center;
+}
+
+@keyframes inner-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Center dot pulse */
+.loader-center-dot {
+  animation: center-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes center-pulse {
+  0%, 100% { 
+    r: 8;
+    opacity: 1;
+  }
+  50% { 
+    r: 12;
+    opacity: 0.6;
+  }
+}
+
+/* Energy wave animations */
+.loader-wave-1,
+.loader-wave-2,
+.loader-wave-3 {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.loader-wave-1 {
+  animation: wave-expand 2s ease-out infinite;
+  animation-delay: 0s;
+}
+
+.loader-wave-2 {
+  animation: wave-expand 2s ease-out infinite;
+  animation-delay: 0.7s;
+}
+
+.loader-wave-3 {
+  animation: wave-expand 2s ease-out infinite;
+  animation-delay: 1.4s;
+}
+
+@keyframes wave-expand {
+  0% {
+    transform: scale(0.5);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+/* Text animations */
+.loader-text-container {
+  animation: text-float 2s ease-in-out infinite;
+}
+
+@keyframes text-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}
+
+.loader-text-main {
+  animation: text-shimmer 3s linear infinite;
+}
+
+@keyframes text-shimmer {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+/* Glitch effect */
+.loader-text-glitch {
+  animation: glitch 2s steps(10) infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+  opacity: 0.7;
+}
+
+@keyframes glitch {
+  0%, 100% { 
+    transform: translate(0, 0); 
+    opacity: 0;
+  }
+  10% { 
+    transform: translate(-2px, 2px); 
+    opacity: 0.7;
+  }
+  20% { 
+    transform: translate(2px, -2px); 
+    opacity: 0.5;
+  }
+  30% { 
+    transform: translate(-2px, -2px); 
+    opacity: 0.3;
+  }
+  40% { 
+    transform: translate(0, 0); 
+    opacity: 0;
+  }
+}
+
+/* Progress bars animation */
+.loader-progress-bar {
+  width: 8px;
+  height: 3px;
+  border-radius: 2px;
+  animation: progress-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes progress-pulse {
+  0%, 100% { 
+    transform: scaleY(1);
+    opacity: 0.5;
+  }
+  50% { 
+    transform: scaleY(3);
+    opacity: 1;
+  }
+}
+
+/* Fullscreen background animation */
+.loader-bg {
+  animation: bg-shift 10s ease-in-out infinite;
+}
+
+@keyframes bg-shift {
+  0%, 100% { 
+    filter: hue-rotate(0deg);
+  }
+  50% { 
+    filter: hue-rotate(20deg);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .loader-container {
+    transform: scale(0.8);
+  }
+}
+
+/* Accessibility - Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .loader-container,
+  .loader-ring-outer,
+  .loader-ring-middle,
+  .loader-particle-orbit,
+  .loader-particle,
+  .loader-morph,
+  .loader-glow,
+  .loader-spin-main,
+  .loader-morph-path,
+  .loader-inner-circle,
+  .loader-center-dot,
+  .loader-wave-1,
+  .loader-wave-2,
+  .loader-wave-3,
+  .loader-text-container,
+  .loader-text-main,
+  .loader-text-glitch,
+  .loader-progress-bar,
+  .loader-bg {
+    animation: none !important;
+  }
+}

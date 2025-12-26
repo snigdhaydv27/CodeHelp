@@ -150,11 +150,11 @@ function Sidebar() {
 
             {/* Optimize */}
             <Link
-              href="/optimiser"
+              href="/codeOptimiser"
               className={`flex items-center ${
                 isSidebarOpen ? "space-x-3" : "justify-center"
               } p-3 rounded-xl transition-all ${
-                isActive("/optimiser")
+                isActive("/codeOptimiser")
                   ? isDark
                     ? "bg-blue-900/30 text-blue-400"
                     : "bg-blue-50 text-blue-600"
@@ -169,11 +169,11 @@ function Sidebar() {
 
             {/* Generate */}
             <Link
-              href="/codegenerator"
+              href="/codeGenerator"
               className={`flex items-center ${
                 isSidebarOpen ? "space-x-3" : "justify-center"
               } p-3 rounded-xl transition-all ${
-                isActive("/codegenerator")
+                isActive("/codeGenerator")
                   ? isDark
                     ? "bg-blue-900/30 text-blue-400"
                     : "bg-blue-50 text-blue-600"
@@ -188,11 +188,11 @@ function Sidebar() {
 
             {/* Complexity */}
             <Link
-              href="/codecomplexity"
+              href="/codeComplexity"
               className={`flex items-center ${
                 isSidebarOpen ? "space-x-3" : "justify-center"
               } p-3 rounded-xl transition-all ${
-                isActive("/codecomplexity")
+                isActive("/codeComplexity")
                   ? isDark
                     ? "bg-blue-900/30 text-blue-400"
                     : "bg-blue-50 text-blue-600"
@@ -207,11 +207,11 @@ function Sidebar() {
 
             {/* Compare */}
             <Link
-              href="/codecompare"
+              href="/codeCompare"
               className={`flex items-center ${
                 isSidebarOpen ? "space-x-3" : "justify-center"
               } p-3 rounded-xl transition-all ${
-                isActive("/codecompare")
+                isActive("/codeCompare")
                   ? isDark
                     ? "bg-blue-900/30 text-blue-400"
                     : "bg-blue-50 text-blue-600"
