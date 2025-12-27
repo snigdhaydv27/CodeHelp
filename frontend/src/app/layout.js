@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
       >
         <ThemeProvider>
           <Sidebar />
-          <main className="lg:ml-20">
+          <main className="lg:ml-48">
             {children}
           </main>
         </ThemeProvider>

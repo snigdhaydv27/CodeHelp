@@ -32,7 +32,7 @@ import { IoMdAnalytics } from "react-icons/io";
 import { GoPackageDependencies } from "react-icons/go";
 
 function Sidebar() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isToolsOpen, setIsToolsOpen] = useState(false);
   const [isCompanyOpen, setIsCompanyOpen] = useState(false);
   const { isDark, toggleTheme } = useTheme();
@@ -78,44 +78,38 @@ function Sidebar() {
         {isSidebarOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
       </button>
 
+      {/* Overlay for mobile */}
+      {isSidebarOpen && (
+        <div
+          onClick={toggleSidebar}
+          className="fixed inset-0 bg-black/50 z-30 lg:hidden"
+        />
+      )}
+
       {/* Sidebar */}
       <aside
         className={`fixed top-0 left-0 h-screen transition-all duration-300 z-40 overflow-y-auto overflow-x-hidden
-        ${isSidebarOpen ? "w-64 border-r" : "w-0 lg:w-20 lg:border-r"}
-        ${isSidebarOpen 
-          ? isDark ? "bg-gray-900 border-gray-700" : "bg-white border-gray-200"
-          : isDark ? "lg:bg-gray-900 lg:border-gray-700" : "lg:bg-white lg:border-gray-200"
-        }`}
+        ${isSidebarOpen ? "w-48" : "w-0 lg:w-48"} border-r
+        ${isDark ? "bg-gray-800 border-gray-700" : "bg-gray-100 border-gray-200"}
+        `}
       >
-        <div className={`${isSidebarOpen ? "p-6" : "p-4"} space-y-6`}>
+        <div className="p-6 space-y-6">
           {/* Logo */}
           <div className="flex items-center justify-between mb-8">
-            {isSidebarOpen && (
-              <Link href="/" className="flex items-center space-x-2">
-                <FaCode className={`text-2xl ${
-                  isDark ? "text-blue-500" : "text-gray-900"
-                }`} />
-                <span className={`font-bold text-xl ${
-                  isDark ? "text-white" : "text-gray-900"
-                }`}>CodeHelp</span>
-              </Link>
-            )}
-            <button
-              onClick={toggleSidebar}
-              className={`hidden lg:block p-2 rounded-lg ${
-                isDark ? "hover:bg-gray-800 text-gray-300" : "hover:bg-gray-100 text-gray-700"
-              }`}
-            >
-              {isSidebarOpen ? <FaTimes /> : <FaBars />}
-            </button>
+            <Link href="/" className="flex items-center space-x-2">
+              <FaCode className={`text-2xl ${
+                isDark ? "text-blue-500" : "text-gray-900"
+              }`} />
+              <span className={`font-bold text-xl ${
+                isDark ? "text-white" : "text-gray-900"
+              }`}>CodeHelp</span>
+            </Link>
           </div>
 
           {/* Theme Toggle */}
           <button
             onClick={toggleTheme}
-            className={`w-full p-3 rounded-xl flex items-center ${
-              isSidebarOpen ? "justify-start space-x-3" : "justify-center"
-            } ${
+            className={`w-full p-3 rounded-xl flex items-center justify-start space-x-3 ${
               isDark ? "hover:bg-gray-800 text-gray-300" : "hover:bg-gray-100 text-gray-900"
             }`}
           >
@@ -124,7 +118,7 @@ function Sidebar() {
             ) : (
               <FaMoon className="text-indigo-600" />
             )}
-            {isSidebarOpen && <span>Theme</span>}
+            <span>Theme</span>
           </button>
 
           {/* Navigation */}
@@ -132,9 +126,7 @@ function Sidebar() {
             {/* Home */}
             <Link
               href="/"
-              className={`flex items-center ${
-                isSidebarOpen ? "space-x-3" : "justify-center"
-              } p-3 rounded-xl transition-all ${
+              className={`flex items-center space-x-3 p-3 rounded-xl transition-all ${
                 isActive("/")
                   ? isDark
                     ? "bg-blue-900/30 text-blue-400"
@@ -145,15 +137,13 @@ function Sidebar() {
               }`}
             >
               <FaHome/>
-              {isSidebarOpen && <span>Home</span>}
+              <span>Home</span>
             </Link>
 
             {/* Optimize */}
             <Link
               href="/codeOptimiser"
-              className={`flex items-center ${
-                isSidebarOpen ? "space-x-3" : "justify-center"
-              } p-3 rounded-xl transition-all ${
+              className={`flex items-center space-x-3 p-3 rounded-xl transition-all ${
                 isActive("/codeOptimiser")
                   ? isDark
                     ? "bg-blue-900/30 text-blue-400"
@@ -164,15 +154,13 @@ function Sidebar() {
               }`}
             >
               <FaRocket />
-              {isSidebarOpen && <span>Optimize</span>}
+              <span>Optimize</span>
             </Link>
 
             {/* Generate */}
             <Link
               href="/codeGenerator"
-              className={`flex items-center ${
-                isSidebarOpen ? "space-x-3" : "justify-center"
-              } p-3 rounded-xl transition-all ${
+              className={`flex items-center space-x-3 p-3 rounded-xl transition-all ${
                 isActive("/codeGenerator")
                   ? isDark
                     ? "bg-blue-900/30 text-blue-400"
@@ -183,15 +171,13 @@ function Sidebar() {
               }`}
             >
               <FaMagic />
-              {isSidebarOpen && <span>Generate</span>}
+              <span>Generate</span>
             </Link>
 
             {/* Complexity */}
             <Link
               href="/codeComplexity"
-              className={`flex items-center ${
-                isSidebarOpen ? "space-x-3" : "justify-center"
-              } p-3 rounded-xl transition-all ${
+              className={`flex items-center space-x-3 p-3 rounded-xl transition-all ${
                 isActive("/codeComplexity")
                   ? isDark
                     ? "bg-blue-900/30 text-blue-400"
@@ -202,15 +188,13 @@ function Sidebar() {
               }`}
             >
               <FaChartLine />
-              {isSidebarOpen && <span>Complexity</span>}
+              <span>Complexity</span>
             </Link>
 
             {/* Compare */}
             <Link
               href="/codeCompare"
-              className={`flex items-center ${
-                isSidebarOpen ? "space-x-3" : "justify-center"
-              } p-3 rounded-xl transition-all ${
+              className={`flex items-center space-x-3 p-3 rounded-xl transition-all ${
                 isActive("/codeCompare")
                   ? isDark
                     ? "bg-blue-900/30 text-blue-400"
@@ -221,16 +205,14 @@ function Sidebar() {
               }`}
             >
               <FaExchangeAlt />
-              {isSidebarOpen && <span>Compare</span>}
+              <span>Compare</span>
             </Link>
 
             {/* Tools Dropdown */}
             <div>
               <button
                 onClick={() => setIsToolsOpen(!isToolsOpen)}
-                className={`w-full flex items-center ${
-                  isSidebarOpen ? "justify-between" : "justify-center"
-                } p-3 rounded-xl transition-all ${
+                className={`w-full flex items-center justify-between p-3 rounded-xl transition-all ${
                   isToolsActive()
                     ? isDark
                       ? "bg-blue-900/30 text-blue-400"
@@ -242,18 +224,16 @@ function Sidebar() {
               >
                 <div className="flex items-center space-x-3">
                   <FaTools />
-                  {isSidebarOpen && <span>Tools</span>}
+                  <span>Tools</span>
                 </div>
-                {isSidebarOpen && (
-                  <FaChevronDown
-                    className={`transform transition-transform ${
-                      isToolsOpen ? "rotate-180" : ""
-                    }`}
-                  />
-                )}
+                <FaChevronDown
+                  className={`transform transition-transform ${
+                    isToolsOpen ? "rotate-180" : ""
+                  }`}
+                />
               </button>
 
-              {isToolsOpen && isSidebarOpen && (
+              {isToolsOpen && (
                 <div className="ml-4 mt-2 space-y-1">
                   {[
                     {
@@ -332,9 +312,7 @@ function Sidebar() {
             <div>
               <button
                 onClick={() => setIsCompanyOpen(!isCompanyOpen)}
-                className={`w-full flex items-center ${
-                  isSidebarOpen ? "justify-between" : "justify-center"
-                } p-3 rounded-xl transition-all ${
+                className={`w-full flex items-center justify-between p-3 rounded-xl transition-all ${
                   isCompanyActive()
                     ? isDark
                       ? "bg-blue-900/30 text-blue-400"
@@ -346,18 +324,16 @@ function Sidebar() {
               >
                 <div className="flex items-center space-x-3">
                   <FaRegBuilding />
-                  {isSidebarOpen && <span>Company</span>}
+                  <span>Company</span>
                 </div>
-                {isSidebarOpen && (
-                  <FaChevronDown
-                    className={`transform transition-transform ${
-                      isCompanyOpen ? "rotate-180" : ""
-                    }`}
-                  />
-                )}
+                <FaChevronDown
+                  className={`transform transition-transform ${
+                    isCompanyOpen ? "rotate-180" : ""
+                  }`}
+                />
               </button>
 
-              {isCompanyOpen && isSidebarOpen && (
+              {isCompanyOpen && (
                 <div className="ml-4 mt-2 space-y-1">
                   {[
                     { href: "/about", label: "About Us" },

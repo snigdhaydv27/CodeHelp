@@ -35,6 +35,13 @@ const CodeCompare = () => {
     { value: 'php', label: 'PHP' },
   ];
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
   const compareCode = async () => {
     if (!leftCode.trim() || !rightCode.trim()) {
       toast.error('Please enter code in both editors');
@@ -78,18 +85,10 @@ const CodeCompare = () => {
     toast.success('Comparison copied to clipboard!');
   };
   
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-      window.scrollTo(0, 0);
-    }, 1500);
-    return () => clearTimeout(timer);
-  }, []);
-  
   if (loading) {
     return (
       <div className={`min-h-screen flex items-center justify-center ${isDark ? 'bg-gray-800' : 'bg-gray-100'}`}>
-        <Loader fullscreen size="xl" color="red" text="Loading Code Comparison Tool..." />
+        <Loader size="xl" color="red" text="Loading Code Comparison Tool..." />
       </div>
     );
   }
@@ -103,7 +102,7 @@ const CodeCompare = () => {
             <div className="flex items-center mb-4 md:mb-0">
               <FaExchangeAlt className="text-red-400 text-2xl mr-2" />
               <h1 className={`text-2xl md:text-3xl font-bold ${isDark ? 'text-white' : 'text-gray-800'}`}>
-                OMEX Code Comparison
+                CodeHelp Code Comparison
               </h1>
             </div>
             <div className="flex flex-wrap gap-3">

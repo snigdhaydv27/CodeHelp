@@ -1,16 +1,15 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import CodeEditor from '../../components/CodeEditor.jsx';
-// import CodeExamples from '../../components/CodeExamples.jsx';
-// import FeedbackButton from '../../components/FeedbackButton.jsx';
-// import CodeHistory from '../../components/CodeHistory.jsx';
+import CodeHistory from '../../components/CodeHistory.jsx';
 import { FaLightbulb, FaCode } from 'react-icons/fa';
 import { useTheme } from '../../context/ThemeContext';
 import Loader from '../../components/Loader.jsx';
 
 function CodeOptimizer() {
   const { isDark } = useTheme();
+  const historyRef = useRef(null);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -61,7 +60,7 @@ function CodeOptimizer() {
   if (loading) {
     return (
       <div className={`min-h-screen flex items-center justify-center ${isDark ? 'bg-gray-800' : 'bg-gray-100'}`}>
-        <Loader fullscreen size="xl" color="red" text="Loading Code Optimizer Tool..." />
+        <Loader size="xl" color="red" text="Loading Code Optimizer Tool..." />
       </div>
     );
   }
@@ -75,7 +74,7 @@ function CodeOptimizer() {
             <div className="flex items-center mb-4 md:mb-0">
               <FaLightbulb className="text-yellow-400 text-2xl mr-2" />
               <h1 className={`text-2xl md:text-3xl font-bold ${isDark ? 'text-white' : 'text-gray-800'}`}>
-                OMEX Code Optimizer
+                CodeHelp Code Optimizer
               </h1>
             </div>
             <div className="flex space-x-4">
@@ -114,18 +113,20 @@ function CodeOptimizer() {
 
         {/* Code Editor */}
         <div className="bg-gray-700 rounded-lg shadow-xl overflow-hidden">
-          <CodeEditor URL={URL} prompt={prompt} />
+          <CodeEditor 
+            URL={URL} 
+            prompt={prompt}
+            historyRef={historyRef}
+          />
         </div>
       </div>
 
-      {/* Feedback Form - Component not created yet */}
-      {/* <FeedbackButton toolName="Code Optimizer" /> */}
-
-      {/* Code History - Component not created yet */}
-      {/* <CodeHistory
+      {/* Code History */}
+      <CodeHistory
+        ref={historyRef}
         onSelectHistory={(code) => setPrompt(code)}
         isDark={isDark}
-      /> */}
+      />
     </div>
   );
 }
