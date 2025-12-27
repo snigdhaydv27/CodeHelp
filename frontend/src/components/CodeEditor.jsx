@@ -14,6 +14,7 @@ import { useTheme } from '../context/ThemeContext';
 
 function CodeEditor(props) {
   const URL = props.URL;
+  const historyRef = props.historyRef; // Get historyRef from props
   const [prompt, setPrompt] = useState(props.prompt || '');
   const [copyText, setCopyButtonText] = useState(true);
   const [copyAllText, setCopyAllButtonText] = useState(true);
@@ -148,6 +149,11 @@ function CodeEditor(props) {
       const response = await axios.post(URL, { prompt });
       setReview(response.data);
       extractRecommendedFix(response.data);
+      
+      // Add to history if historyRef is available
+      if (historyRef?.current && optimisedCode) {
+        historyRef.current.addToHistory(prompt, optimisedCode);
+      }
     } catch (err) {
       console.log(err);
       toast.error("An error occurred. Please try again.");
