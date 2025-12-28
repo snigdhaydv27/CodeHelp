@@ -6,6 +6,7 @@ import CodeHistory from '../../components/CodeHistory.jsx';
 import { FaLightbulb, FaCode } from 'react-icons/fa';
 import { useTheme } from '../../context/ThemeContext';
 import Loader from '../../components/Loader.jsx';
+import BackToTopButton from '../../components/BackToTopButton.jsx';
 
 function CodeOptimizer() {
   const { isDark } = useTheme();
@@ -127,6 +128,7 @@ function CodeOptimizer() {
         onSelectHistory={(code) => setPrompt(code)}
         isDark={isDark}
       />
+      <BackToTopButton />
     </div>
   );
 }

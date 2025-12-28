@@ -237,29 +237,29 @@ function Sidebar() {
                 <div className="ml-4 mt-2 space-y-1">
                   {[
                     {
-                      href: "/code-tools",
+                      href: "/complete-suites",
                       icon: FaTools,
                       label: "Complete Suite",
                     },
                     {
-                      href: "/test-case-generator",
+                      href: "/test-case-builder",
                       icon: FaVial,
-                      label: "Unit Test Builder",
+                      label: "Test Case Builder",
                     },
                     {
-                      href: "/code-beautifier",
+                      href: "/codeBeautifier",
                       icon: FaPaintBrush,
-                      label: "Format Optimizer",
+                      label: "Code Beautifier",
                     },
                     {
-                      href: "/error-debugger",
+                      href: "/errorDebugger",
                       icon: FaBug,
                       label: "Bug Detective",
                     },
                     {
                       href: "/performance-analyzer",
                       icon: FaTachometerAlt,
-                      label: "Speed Inspector",
+                      label: "Code Analyzer",
                     },
                     {
                       href: "/content-summarizer",
