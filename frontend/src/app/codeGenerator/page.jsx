@@ -6,6 +6,7 @@ import CodeEditor from '../../components/CodeEditor';
 import Loader from '../../components/Loader';
 // import FeedbackButton from '../../components/FeedbackButton';
 import { useTheme } from '../../context/ThemeContext';
+import BackToTopButton from '../../components/BackToTopButton';
 
 function CodeGenerator() {
   const { isDark } = useTheme();
@@ -38,6 +39,7 @@ function CodeGenerator() {
       
       {/* Feedback Button - Component not created yet */}
       {/* <FeedbackButton toolName="Code Generator" /> */}
+      <BackToTopButton />
     </>
   );
 }

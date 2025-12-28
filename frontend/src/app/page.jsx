@@ -8,6 +8,7 @@ import { TextPlugin } from "gsap/TextPlugin";
 import { useGSAP } from "@gsap/react";
 import { usePathname } from "next/navigation";
 import { useTheme } from "../context/ThemeContext";
+import BackToTopButton from "../components/BackToTopButton";
 
 // Register GSAP plugins (this is a key fix for your GSAP errors)
 gsap.registerPlugin(ScrollTrigger, TextPlugin);
@@ -829,6 +830,7 @@ function Home() {
         </div>
       </section>
       {/* <FAQSection /> */}
+      <BackToTopButton />
     </div>
   );
 }
@@ -913,4 +915,5 @@ const StepCard = ({ number, title, description, isDark }) => {
     </div>
   );
 };
+
 export default Home;

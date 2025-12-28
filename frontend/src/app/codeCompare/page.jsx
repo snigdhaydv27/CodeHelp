@@ -13,6 +13,7 @@ import 'highlight.js/styles/github-dark.css';
 import Loader from '../../components/Loader';
 // import FeedbackButton from '../../components/FeedbackButton';
 import { useTheme } from '../../context/ThemeContext';
+import BackToTopButton from '../../components/BackToTopButton';
 
 const CodeCompare = () => {
   const [leftCode, setLeftCode] = useState('// Enter your first code snippet here');
@@ -297,6 +298,7 @@ const CodeCompare = () => {
       
       {/* Feedback Button - Component not created yet */}
       {/* <FeedbackButton toolName="Code Compare" /> */}
+      <BackToTopButton />
     </div>
   );
 };
