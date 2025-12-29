@@ -10,7 +10,6 @@ import {
   FaChevronDown,
   FaChevronRight,
   FaCode,
-  FaEnvelope,
   FaExchangeAlt,
   FaRocket,
   FaMoon,
@@ -27,6 +26,10 @@ import {
   FaBars,
   FaTimes,
   FaHome,
+  FaGithub,
+  FaLinkedin,
+  FaTwitter,
+  FaXbox,
 } from "react-icons/fa";
 import { IoMdAnalytics } from "react-icons/io";
 import { GoPackageDependencies } from "react-icons/go";
@@ -93,7 +96,7 @@ function Sidebar() {
         ${isDark ? "bg-gray-800 border-gray-700" : "bg-gray-100 border-gray-200"}
         `}
       >
-        <div className="p-6 space-y-6">
+        <div className="p-6 flex flex-col h-full">
           {/* Logo */}
           <div className="flex items-center justify-between mb-8">
             <Link href="/" className="flex items-center space-x-2">
@@ -106,23 +109,25 @@ function Sidebar() {
             </Link>
           </div>
 
-          {/* Theme Toggle */}
-          <button
-            onClick={toggleTheme}
-            className={`w-full p-3 rounded-xl flex items-center justify-start space-x-3 ${
-              isDark ? "hover:bg-gray-800 text-gray-300" : "hover:bg-gray-100 text-gray-900"
-            }`}
-          >
-            {isDark ? (
-              <FaSun className="text-yellow-400" />
-            ) : (
-              <FaMoon className="text-indigo-600" />
-            )}
-            <span>Theme</span>
-          </button>
+          {/* Main content (theme + navigation) */}
+          <div className="flex-1 space-y-6">
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className={`w-full p-3 rounded-xl flex items-center justify-start space-x-3 ${
+                isDark ? "hover:bg-gray-800 text-gray-300" : "hover:bg-gray-100 text-gray-900"
+              }`}
+            >
+              {isDark ? (
+                <FaSun className="text-yellow-400" />
+              ) : (
+                <FaMoon className="text-indigo-600" />
+              )}
+              <span>Theme</span>
+            </button>
 
-          {/* Navigation */}
-          <nav className="space-y-2">
+            {/* Navigation */}
+            <nav className="space-y-2">
             {/* Home */}
             <Link
               href="/"
@@ -308,59 +313,99 @@ function Sidebar() {
               )}
             </div>
 
-            {/* Company Dropdown */}
-            <div>
-              <button
-                onClick={() => setIsCompanyOpen(!isCompanyOpen)}
-                className={`w-full flex items-center justify-between p-3 rounded-xl transition-all ${
-                  isCompanyActive()
-                    ? isDark
-                      ? "bg-blue-900/30 text-blue-400"
-                      : "bg-blue-50 text-blue-600"
-                    : isDark
-                    ? "hover:bg-gray-800 text-gray-300"
-                    : "hover:bg-gray-100 text-gray-900"
-                }`}
-              >
-                <div className="flex items-center space-x-3">
-                  <FaRegBuilding />
-                  <span>Company</span>
-                </div>
-                <FaChevronDown
-                  className={`transform transition-transform ${
-                    isCompanyOpen ? "rotate-180" : ""
+              {/* Company Dropdown */}
+              <div>
+                <button
+                  onClick={() => setIsCompanyOpen(!isCompanyOpen)}
+                  className={`w-full flex items-center justify-between p-3 rounded-xl transition-all ${
+                    isCompanyActive()
+                      ? isDark
+                        ? "bg-blue-900/30 text-blue-400"
+                        : "bg-blue-50 text-blue-600"
+                      : isDark
+                      ? "hover:bg-gray-800 text-gray-300"
+                      : "hover:bg-gray-100 text-gray-900"
                   }`}
-                />
-              </button>
+                >
+                  <div className="flex items-center space-x-3">
+                    <FaRegBuilding />
+                    <span>Company</span>
+                  </div>
+                  <FaChevronDown
+                    className={`transform transition-transform ${
+                      isCompanyOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
 
-              {isCompanyOpen && (
-                <div className="ml-4 mt-2 space-y-1">
-                  {[
-                    { href: "/about", label: "About Us" },
-                    { href: "/contact", label: "Contact" },
-                    { href: "/feedback", label: "Feedback" },
-                    { href: "/privacy-policy", label: "Privacy Policy" },
-                  ].map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className={`block p-2 rounded-lg text-sm ${
-                        isActive(item.href)
-                          ? isDark
-                            ? "bg-gray-800 text-blue-400"
-                            : "bg-gray-100 text-blue-600"
-                          : isDark
-                          ? "hover:bg-gray-800 text-gray-400"
-                          : "hover:bg-gray-100 text-gray-900"
-                      }`}
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
+                {isCompanyOpen && (
+                  <div className="ml-4 mt-2 space-y-1">
+                    {[
+                      { href: "/about", label: "About Us" },
+                      { href: "/contact", label: "Contact" },
+                      { href: "/feedback", label: "Feedback" },
+                      { href: "/privacy-policy", label: "Privacy Policy" },
+                    ].map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className={`block p-2 rounded-lg text-sm ${
+                          isActive(item.href)
+                            ? isDark
+                              ? "bg-gray-800 text-blue-400"
+                              : "bg-gray-100 text-blue-600"
+                            : isDark
+                            ? "hover:bg-gray-800 text-gray-400"
+                            : "hover:bg-gray-100 text-gray-900"
+                        }`}
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </nav>
+          </div>
+
+          {/* Footer pinned to bottom */}
+          <div
+            className={`mt-6 pt-4 border-t text-[10px] flex flex-col gap-2 items-center text-center ${
+              isDark
+                ? "border-gray-700 text-gray-400"
+                : "border-gray-200 text-gray-500"
+            }`}
+          >
+            <div className="flex items-center justify-center gap-3 text-lg">
+              <a
+                href="https://github.com"
+                target="_blank"
+                rel="noreferrer"
+                className={isDark ? "hover:text-gray-200" : "hover:text-gray-800"}
+              >
+                <FaGithub />
+              </a>
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noreferrer"
+                className={isDark ? "hover:text-gray-200" : "hover:text-gray-800"}
+              >
+                <FaLinkedin />
+              </a>
+              <a
+                href="https://x.com"
+                target="_blank"
+                rel="noreferrer"
+                className={isDark ? "hover:text-gray-200" : "hover:text-gray-800"}
+              >
+                <FaTwitter/>
+              </a>
             </div>
-          </nav>
+            <span className="truncate">
+              © {new Date().getFullYear()} CodeHelp. All rights reserved.
+            </span>
+          </div>
         </div>
       </aside>
     </>
