@@ -252,12 +252,12 @@ function Sidebar() {
                       label: "Code Beautifier",
                     },
                     {
-                      href: "/errorDebugger",
+                      href: "/error-debugger",
                       icon: FaBug,
                       label: "Bug Detective",
                     },
                     {
-                      href: "/performance-analyzer",
+                      href: "/code-analyzer",
                       icon: FaTachometerAlt,
                       label: "Code Analyzer",
                     },
