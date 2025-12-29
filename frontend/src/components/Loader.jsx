@@ -23,18 +23,18 @@ const Loader = ({
 
   // Color system for HTML tag theme
   const colorSystem = {
-    blue: {
-      tag: isDark ? "#3b82f6" : "#2563eb",
-      bracket: isDark ? "#60a5fa" : "#3b82f6",
-      slash: isDark ? "#93c5fd" : "#60a5fa",
-      glow: isDark ? "rgba(59, 130, 246, 0.5)" : "rgba(37, 99, 235, 0.3)",
-    },
-    green: {
-      tag: isDark ? "#10b981" : "#059669",
-      bracket: isDark ? "#34d399" : "#10b981",
-      slash: isDark ? "#6ee7b7" : "#34d399",
-      glow: isDark ? "rgba(16, 185, 129, 0.5)" : "rgba(5, 150, 105, 0.3)",
-    },
+    // blue: {
+    //   tag: isDark ? "#3b82f6" : "#2563eb",
+    //   bracket: isDark ? "#60a5fa" : "#3b82f6",
+    //   slash: isDark ? "#93c5fd" : "#60a5fa",
+    //   glow: isDark ? "rgba(59, 130, 246, 0.5)" : "rgba(37, 99, 235, 0.3)",
+    // },
+    // green: {
+    //   tag: isDark ? "#10b981" : "#059669",
+    //   bracket: isDark ? "#34d399" : "#10b981",
+    //   slash: isDark ? "#6ee7b7" : "#34d399",
+    //   glow: isDark ? "rgba(16, 185, 129, 0.5)" : "rgba(5, 150, 105, 0.3)",
+    // },
     purple: {
       tag: isDark ? "#8b5cf6" : "#7c3aed",
       bracket: isDark ? "#a78bfa" : "#8b5cf6",
