@@ -50,14 +50,14 @@ export default function CodeTools() {
       title: "Bug & Error Debugger",
       description:
         "Identify and fix bugs, syntax errors, and logical issues in your code with detailed explanations.",
-      link: "/errorDebugger",
+      link: "/error-debugger",
     },
     {
       icon: <FaTachometerAlt className="text-green-400 text-2xl" />,
       title: "Code Performance Analyzer",
       description:
         "Analyze execution time and memory usage of your code and get optimization recommendations.",
-      link: "/performanceAnalyzer",
+      link: "/code-analyzer",
     },
     {
       icon: <FaFileAlt className="text-orange-400 text-2xl" />,
