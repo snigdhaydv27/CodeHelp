@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import Markdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github-dark.css";
-// import Loader from "../../components/Loader";
+import Loader from "../../components/Loader";
 // import FeedbackButton from "../../components/FeedbackButton";
 import { useTheme } from "../../context/ThemeContext";
 
@@ -140,7 +140,7 @@ end`,
   if (loading) {
     return (
       <div className={`min-h-screen flex items-center justify-center ${isDark ? 'bg-gray-800' : 'bg-gray-100'}`}>
-        {/* <Loader fullscreen size="xl" color="purple" text="Scanning Code for Vulnerabilities..." /> */}
+        <Loader fullscreen size="xl" color="red" text="Loading Security Scanner..." />
       </div>
     );
   }
@@ -295,7 +295,7 @@ end`,
             >
               {scanLoading ? (
                 <div className="flex justify-center items-center h-full">
-                  <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-red-500"></div>
+                  <Loader size="lg" color="red" text="Analyzing security..." />
                 </div>
               ) : report ? (
                 <div
