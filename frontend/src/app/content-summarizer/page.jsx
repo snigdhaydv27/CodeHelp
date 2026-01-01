@@ -9,7 +9,7 @@ import MediaUploader from '../../components/MediaUploader';
 // import YouTubeInput from '../../components/YouTubeInput';
 import SummaryDisplay from '../../components/SummaryDisplay';
 import { useTheme } from '../../context/ThemeContext';
-// import Loader from '../../components/Loader';
+import Loader from '../../components/Loader';
 // import FeedbackButton from '../../components/FeedbackButton';
 
 /**
@@ -164,7 +164,7 @@ function ContentSummarizer() {
   if (loading) {
     return (
       <div className={`min-h-screen flex items-center justify-center ${isDark ? 'bg-gray-800' : 'bg-gray-100'}`}>
-        {/* <Loader fullscreen size="xl" color="purple" text="Loading Content Summarising Tool..." /> */}
+        <Loader fullscreen size="xl" color="blue" text="Loading Content Summarizer..." />
       </div>
     );
   }
