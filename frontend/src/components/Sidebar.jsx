@@ -4,11 +4,9 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "../context/ThemeContext";
-import { MdOutlineCleaningServices } from "react-icons/md";
 import {
   FaChartLine,
   FaChevronDown,
-  FaChevronRight,
   FaCode,
   FaExchangeAlt,
   FaRocket,
@@ -29,9 +27,7 @@ import {
   FaGithub,
   FaLinkedin,
   FaTwitter,
-  FaXbox,
 } from "react-icons/fa";
-import { IoMdAnalytics } from "react-icons/io";
 import { GoPackageDependencies } from "react-icons/go";
 
 function Sidebar() {
@@ -58,8 +54,6 @@ function Sidebar() {
       "/performance-analyzer",
       "/content-summarizer",
       "/security-scanner",
-      "/dependency-scanner",
-      "/dead-code-finder",
     ];
     return toolsPaths.some((path) => pathname === path);
   };
@@ -280,16 +274,6 @@ function Sidebar() {
                       href: "/dependency-scanner",
                       icon: GoPackageDependencies,
                       label: "Library Scanner",
-                    },
-                    {
-                      href: "/code-metrics-analyzer",
-                      icon: IoMdAnalytics,
-                      label: "Metrics Analyzer",
-                    },
-                    {
-                      href: "/dead-code-finder",
-                      icon: MdOutlineCleaningServices,
-                      label: "Unused Code Cleaner",
                     },
                   ].map((item) => (
                     <Link
