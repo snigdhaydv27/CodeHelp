@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, forwardRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Loader from "../../components/Loader";
 import { gsap } from "gsap";
@@ -11,13 +11,10 @@ import {
   FaMagic,
   FaBug,
   FaTachometerAlt,
-  FaArrowRight,
   FaFileAlt,
   FaShieldAlt,
 } from "react-icons/fa";
 import { GoPackageDependencies } from "react-icons/go";
-import { GrAnalytics } from "react-icons/gr"; 
-import { MdOutlineCleaningServices } from 'react-icons/md';
 import { useTheme } from "../../context/ThemeContext";
 import BackToTopButton from "../../components/BackToTopButton";
 
@@ -79,21 +76,7 @@ export default function CodeTools() {
       description:
         "Scan your dependencies for vulnerabilities and deprecation.",
       link: "/libraryScanner",
-    },
-    {
-      icon: <GrAnalytics className="text-orange-500 text-2xl" />,
-      title: "Metrics Analyzer",
-      description:
-        "Analyze your codebase for various metrics like complexity, maintainability, and more.",
-      link: "/metricsAnalyzer",
-    },
-    {
-      icon: <MdOutlineCleaningServices className="text-pink-400 text-2xl mr-2" />,
-      title: "Unused Code Cleaner",
-      description:
-        "The Unused Code Cleaner helps you keep your projects clean and maintainable by detecting unused code.",
-      link: "/unusedCodeCleaner",
-    },
+    }
   ];
 
   useEffect(() => {
