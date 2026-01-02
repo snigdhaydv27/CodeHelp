@@ -271,7 +271,7 @@ function Sidebar() {
                       label: "Security Scanner",
                     },
                     {
-                      href: "/dependency-scanner",
+                      href: "/library-scanner",
                       icon: GoPackageDependencies,
                       label: "Library Scanner",
                     },

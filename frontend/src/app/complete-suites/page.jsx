@@ -61,21 +61,21 @@ export default function CodeTools() {
       title: "Content Summarizer",
       description:
         "Upload media files (images, PDFs, videos, text) and get AI-generated summaries of their content.",
-      link: "/contentSummarizer",
+      link: "/content-summarizer",
     },
     {
       icon: <FaShieldAlt className="text-red-500 text-2xl" />,
       title: "Security Scanner",
       description:
         "Scan your code for security flaws like SQL injection, XSS, and hardcoded secrets with remediation suggestions.",
-      link: "/securityScanner",
+      link: "/security-scanner",
     },
     {
       icon: <GoPackageDependencies className="text-orange-500 text-2xl" />,
       title: "Library Scanner",
       description:
         "Scan your dependencies for vulnerabilities and deprecation.",
-      link: "/libraryScanner",
+      link: "/library-scanner",
     }
   ];
 
