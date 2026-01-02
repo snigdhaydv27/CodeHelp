@@ -327,7 +327,6 @@ function Sidebar() {
                     {[
                       { href: "/about", label: "About Us" },
                       { href: "/contact", label: "Contact" },
-                      { href: "/feedback", label: "Feedback" },
                       { href: "/privacy-policy", label: "Privacy Policy" },
                     ].map((item) => (
                       <Link
