@@ -9,7 +9,6 @@ import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github-dark.css";
 import Loader from "../../components/Loader";
 import { useTheme } from "../../context/ThemeContext";
-// import FeedbackButton from "../../components/FeedbackButton";
 
 export default function PerformanceAnalyzerPage() {
   const exampleCodes = {
@@ -384,9 +383,6 @@ end`,
         </div>
       </div>
 
-      {/* Feedback Button - component not available:
-      <FeedbackButton toolName="Performance Analyzer" />
-      */}
     </div>
   );
 }

@@ -6,7 +6,6 @@ import BackToTopButton from '../../components/BackToTopButton';
 // import CodeEditor from '../../components/CodeEditor';
 // import { useTheme } from '../../context/ThemeContext';
 // import Loader from '../../components/Loader';
-// import FeedbackButton from '../../components/FeedbackButton';
 
 function CodeComplexity() {
     // const { isDark } = useTheme();
@@ -41,9 +40,6 @@ function CodeComplexity() {
     return (
         <div className='' >
             <CodeMetricsAnalyzer />
-            
-            {/* Feedback Button */}
-            {/* <FeedbackButton toolName="Code Complexity Analyzer" /> */}
             <BackToTopButton />
         </div>
     );

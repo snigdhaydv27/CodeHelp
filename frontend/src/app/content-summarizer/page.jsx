@@ -10,7 +10,6 @@ import MediaUploader from '../../components/MediaUploader';
 import SummaryDisplay from '../../components/SummaryDisplay';
 import { useTheme } from '../../context/ThemeContext';
 import Loader from '../../components/Loader';
-// import FeedbackButton from '../../components/FeedbackButton';
 
 /**
  * Page component for the Content Summarizer feature
@@ -473,9 +472,6 @@ function ContentSummarizer() {
           </div>
         </div>
       </div>
-      
-      {/* Feedback Button */}
-      {/* <FeedbackButton toolName="Content Summarizer" /> */}
     </div>
   );
 }

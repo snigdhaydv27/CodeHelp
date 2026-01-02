@@ -4,7 +4,6 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import CodeEditor from '../../components/CodeEditor';
 import Loader from '../../components/Loader';
-// import FeedbackButton from '../../components/FeedbackButton';
 import { useTheme } from '../../context/ThemeContext';
 import BackToTopButton from '../../components/BackToTopButton';
 
@@ -36,9 +35,6 @@ function CodeGenerator() {
       <div className=''>
         <CodeEditor URL={URL} prompt={prompt} />
       </div>
-      
-      {/* Feedback Button - Component not created yet */}
-      {/* <FeedbackButton toolName="Code Generator" /> */}
       <BackToTopButton />
     </>
   );
