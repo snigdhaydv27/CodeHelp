@@ -29,12 +29,12 @@ function CodeComplexity() {
 if (loading) {
     return (
       <div className={`min-h-screen flex items-center justify-center ${isDark ? 'bg-gray-800' : 'bg-gray-100'}`}>
-        {/* <Loader fullscreen size="xl" color="purple" text="Loading Complexity Tool..." /> */}
+        <Loader fullscreen size="xl" color="red" text="Loading Complexity Tool..." />
       </div>
     );
   }
     return (
-        <div className='' >
+        <div className='w-full' >
             <CodeEditor URL={URL} prompt={prompt} />
         </div>
     )
