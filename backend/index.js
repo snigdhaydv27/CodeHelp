@@ -1,25 +1,36 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-require('dotenv').config();
+const path = require('path');
+const aiRoutes = require('./routes/ai.routes');
+const mediaRoutes = require('./routes/media.routes');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+
+// Static files
+app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 
 // Routes
 app.get('/', (req, res) => {
-  res.json({ message: 'Welcome to the API' });
+    res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'OK', timestamp: new Date().toISOString() });
+app.use('/ai', aiRoutes);       // -> /ai/code-metrics-analyzer
+app.use('/media', mediaRoutes); // -> /media/...
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');   
 });
+
+module.exports = app;
 
 // Start server
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.listen(process.env.PORT || 5000, () => {
+    console.log(`Server is running on http://localhost:${process.env.PORT || 5000}`)
 });
