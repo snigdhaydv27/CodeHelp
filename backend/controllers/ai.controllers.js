@@ -21,10 +21,41 @@ const handleRequest = async (
     const response = await serviceMethod(...args);
     res.send(response);
   } catch (error) {
-    console.error(`Error in ${serviceMethod.name}:`, error);
+    console.error(`Error in ${serviceMethod.name}:`, error.message);
+    
+    // Log full error details for debugging
+    console.error(`Full error object:`, {
+      status: error.status,
+      statusCode: error.statusCode,
+      message: error.message,
+      code: error.code,
+      errorMessage: error.errorMessage,
+      name: error.name
+    });
+    
+    // Handle rate limit errors specifically (check multiple fields)
+    if (error.status === 429 || error.statusCode === 429) {
+      return res.status(429).json({
+        error: "API Rate Limited",
+        message: "Too many requests. Please wait before trying again.",
+        retryAfter: 60
+      });
+    }
+    
+    // Check for timeout errors
+    if (error.code === 'ERR_HTTP_REQUEST_TIMEOUT' || error.message?.includes('timeout')) {
+      return res.status(504).json({
+        error: "Request Timeout",
+        message: "The request took too long. Please try again."
+      });
+    }
+    
     res
       .status(500)
-      .send(`An error occurred while processing ${serviceMethod.name}`);
+      .json({
+        error: "Processing Error",
+        message: error.message || `An error occurred while processing ${serviceMethod.name}`
+      });
   }
 };
 

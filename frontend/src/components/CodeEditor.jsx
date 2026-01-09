@@ -41,6 +41,35 @@ function CodeEditor(props) {
 
   const languages = ["Java", "JavaScript", "C", "C++", "Python", "Go"];
 
+  /**
+   * Retry utility for handling rate limits
+   * @param {Function} fn - The async function to retry
+   * @param {number} maxRetries - Maximum number of retries
+   * @param {number} initialDelayMs - Initial delay in milliseconds
+   */
+  const retryWithBackoff = async (fn, maxRetries = 3, initialDelayMs = 2000) => {
+    let lastError;
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+      try {
+        return await fn();
+      } catch (error) {
+        lastError = error;
+        // Handle rate limit errors specifically
+        if (error.response?.status === 429 && attempt < maxRetries) {
+          const delayMs = initialDelayMs * Math.pow(2, attempt - 1);
+          console.log(`Rate limited. Retrying in ${delayMs}ms (attempt ${attempt}/${maxRetries})`);
+          toast.loading(`Rate limited. Retrying in ${delayMs / 1000}s...`);
+          await new Promise(resolve => setTimeout(resolve, delayMs));
+        } else {
+          throw error;
+        }
+      }
+    }
+    throw lastError;
+  };
+
+  const { isDark: isDarkMode } = useTheme();
+
   // Language mapping for Monaco Editor
   const getMonacoLanguage = (lang) => {
     const langMap = {
@@ -146,19 +175,34 @@ function CodeEditor(props) {
         setLoading(false);
         return;
       }
-      const response = await axios.post(URL, { prompt });
+      
+      // Use retry logic for handling rate limits
+      const response = await retryWithBackoff(() => 
+        axios.post(URL, { prompt })
+      );
       setReview(response.data);
       extractRecommendedFix(response.data);
+      toast.success("Code review completed!");
       
       // Add to history if historyRef is available
       if (historyRef?.current && optimisedCode) {
         historyRef.current.addToHistory(prompt, optimisedCode);
       }
     } catch (err) {
-      console.log(err);
-      toast.error("An error occurred. Please try again.");
+      console.error("Error details:", err);
+      
+      // Handle rate limiting
+      if (err.response?.status === 429) {
+        toast.error("API rate limit exceeded. The free tier API quota is limited per minute. Please upgrade your Google Cloud plan or try again later.");
+      } else if (err.response?.status === 500) {
+        const errorMsg = err.response?.data?.message || "Server error occurred";
+        toast.error(`Error: ${errorMsg}`);
+      } else if (err.message === 'Network Error') {
+        toast.error("Network error. Please check your connection.");
+      } else {
+        toast.error("An error occurred. Please try again.");
+      }
     } finally {
-      toast.success('Operation successful!');
       setLoading(false);
     }
   }
@@ -191,15 +235,29 @@ function CodeEditor(props) {
         return;
       }
 
-      const response = await axios.post(`${URL}/explain-code`, { 
-        code: codeToExplain, 
-        language: codelang 
-      });
+      const response = await retryWithBackoff(() =>
+        axios.post(`${URL}/explain-code`, { 
+          code: codeToExplain, 
+          language: codelang 
+        })
+      );
       setExplanation(response.data);
       setShowExplanationModal(true);
+      toast.success("Code explanation completed!");
     } catch (err) {
-      console.log(err);
-      toast.error("An error occurred while explaining code. Please try again.");
+      console.error("Error details:", err);
+      
+      // Handle rate limiting
+      if (err.response?.status === 429) {
+        toast.error("API rate limit exceeded. The free tier API quota is limited per minute. Please upgrade your Google Cloud plan or try again later.");
+      } else if (err.response?.status === 500) {
+        const errorMsg = err.response?.data?.message || "Server error occurred";
+        toast.error(`Error: ${errorMsg}`);
+      } else if (err.message === 'Network Error') {
+        toast.error("Network error. Please check your connection.");
+      } else {
+        toast.error("An error occurred while explaining code. Please try again.");
+      }
     } finally {
       setExplaining(false);
     }
