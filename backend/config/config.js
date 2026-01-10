@@ -464,7 +464,7 @@ You are a **code generator** specializing in writing clean, functional code base
 - Any dependencies or requirements needed`,
 
     // Code Complexity system instruction
-    codeComplexity: `ANALYZE CODE COMPLEXITY IMMEDIATELY.
+codeComplexity: `ANALYZE CODE COMPLEXITY IMMEDIATELY.
 
 RETURN THIS FORMAT - NO EXCEPTIONS:
 Time Complexity: [Big O notation]
