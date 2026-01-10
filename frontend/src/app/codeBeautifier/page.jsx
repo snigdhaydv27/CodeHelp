@@ -204,8 +204,8 @@ end`,
                 }}
                 className={`px-4 py-3 min-h-[44px] rounded flex items-center justify-center ${
                   isDark
-                    ? 'bg-gray-600 hover:bg-gray-500 active:bg-gray-400'
-                    : 'bg-gray-200 hover:bg-gray-300 active:bg-gray-400'
+                    ? 'bg-gray-600 hover:bg-gray-500 active:bg-gray-400 text-white'
+                    : 'bg-gray-200 hover:bg-gray-300 active:bg-gray-400 text-gray-800'
                 } transition-all duration-150 touch-manipulation`}
                 style={{
                   WebkitTapHighlightColor: 'transparent',
@@ -219,9 +219,9 @@ end`,
               <button
                 onClick={beautifyCode}
                 disabled={isGenerating}
-                className="px-4 py-3 min-h-[44px] bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-white rounded transition-colors flex items-center justify-center"
+                className="px-4 py-3 min-h-[44px] w-40 bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-white rounded transition-colors flex items-center justify-center"
               >
-                {isGenerating ? <Loader size="small" /> : 'Beautify Code'}
+                Beautify Code
               </button>
             </div>
           </div>
@@ -237,8 +237,8 @@ end`,
                   onClick={handleCopyBeautifiedCode}
                   className={`px-3 py-1 rounded ${
                     isDark
-                      ? 'bg-gray-600 hover:bg-gray-500'
-                      : 'bg-gray-200 hover:bg-gray-300'
+                      ? 'bg-gray-600 hover:bg-gray-500 text-white'
+                      : 'bg-gray-200 hover:bg-gray-300 text-gray-800'
                   } transition-colors text-sm`}
                 >
                   Copy to Clipboard
