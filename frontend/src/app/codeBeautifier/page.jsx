@@ -72,6 +72,51 @@ end`,
 
   const languages = ["JavaScript", "Python", "Java", "C++", "C#", "PHP", "Go", "Ruby", "HTML", "CSS"];
 
+  // Clean beautified code by removing ALL explanations - extract ONLY code
+  const cleanBeautifiedCode = (code) => {
+    // First, try to extract code from markdown blocks if they exist
+    const markdownMatch = code.match(/```[\w]*\n([\s\S]*?)\n```/);
+    if (markdownMatch) {
+      return markdownMatch[1].trim();
+    }
+
+    // Remove everything before the first line of actual code
+    const lines = code.split('\n');
+    let codeStart = 0;
+    
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i].trim();
+      // Skip empty lines and common explanation starters
+      if (line && 
+          !line.match(/^(Here|The|This|I|Your|Before|After|Explanation|Improvements?|Changes?|Fixed|Now|As|For|To|Note|Example)/i) &&
+          !line.match(/^[-•*#`]/)) {
+        codeStart = i;
+        break;
+      }
+    }
+
+    // Find where code ends (before explanations start)
+    let codeEnd = lines.length;
+    for (let i = codeStart; i < lines.length; i++) {
+      const line = lines[i].trim();
+      // If we hit explanation patterns, code has ended
+      if (i > codeStart && line.match(/^(This|The|These|Here|Improvement|Explanation|What|Note|Example|As you can|You can|I've|Your code|The code)/i)) {
+        codeEnd = i;
+        break;
+      }
+    }
+
+    const extractedCode = lines.slice(codeStart, codeEnd)
+      .join('\n')
+      .trim()
+      // Remove markdown code block markers if present
+      .replace(/^```[\w]*\n?/, '')
+      .replace(/\n?```$/, '')
+      .trim();
+
+    return extractedCode;
+  };
+
   const beautifyCode = async () => {
     if (!code.trim()) {
       toast.error('Please enter some code first');
@@ -85,9 +130,9 @@ end`,
         language
       });
 
-      // Wrap the response in markdown code block for proper syntax highlighting
-      const formattedCode = `\`\`\`${language.toLowerCase()}\n${response.data}\n\`\`\``;
-      setBeautifiedCode(formattedCode);
+      // Store the beautified code directly and clean it
+      const cleanedCode = cleanBeautifiedCode(response.data);
+      setBeautifiedCode(cleanedCode);
       toast.success('Code beautified successfully!');
     } catch (error) {
       console.error('Error beautifying code:', error);
@@ -252,12 +297,12 @@ end`,
                   <Loader />
                 </div>
               ) : beautifiedCode ? (
-                <div className={`h-full overflow-y-auto p-4 ${isDark ? 'bg-gray-800 text-white' : 'bg-gray-50 text-gray-800'}`}>
-                  <Markdown
-                    rehypePlugins={[rehypeHighlight]}
-                  >
-                    {beautifiedCode}
-                  </Markdown>
+                <div className={`h-full overflow-y-auto p-4 ${isDark ? 'bg-gray-900' : 'bg-white'}`}>
+                  <pre className={`p-4 rounded-lg font-mono text-sm overflow-x-auto ${isDark ? 'bg-gray-800 text-white' : 'bg-gray-50 text-gray-800'}`}>
+                    <code>
+                      {beautifiedCode}
+                    </code>
+                  </pre>
                 </div>
               ) : (
                 <div className={`flex flex-col justify-center items-center h-full ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
