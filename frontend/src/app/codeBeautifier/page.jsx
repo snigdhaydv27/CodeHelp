@@ -67,6 +67,7 @@ end`,
   const [language, setLanguage] = useState('JavaScript');
   const [beautifiedCode, setBeautifiedCode] = useState('');
   const [loading, setLoading] = useState(true);
+  const [isGenerating, setIsGenerating] = useState(false);
   const { isDark } = useTheme();
 
   const languages = ["JavaScript", "Python", "Java", "C++", "C#", "PHP", "Go", "Ruby", "HTML", "CSS"];
@@ -77,20 +78,22 @@ end`,
       return;
     }
 
-    setLoading(true);
+    setIsGenerating(true);
     try {
       const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/ai/beautify-code`, {
         code,
         language
       });
 
-      setBeautifiedCode(response.data);
+      // Wrap the response in markdown code block for proper syntax highlighting
+      const formattedCode = `\`\`\`${language.toLowerCase()}\n${response.data}\n\`\`\``;
+      setBeautifiedCode(formattedCode);
       toast.success('Code beautified successfully!');
     } catch (error) {
       console.error('Error beautifying code:', error);
       toast.error('Failed to beautify code. Please try again.');
     } finally {
-      setLoading(false);
+      setIsGenerating(false);
     }
   };
 
@@ -215,10 +218,10 @@ end`,
               </button>
               <button
                 onClick={beautifyCode}
-                disabled={loading}
-                className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded transition-colors flex items-center"
+                disabled={isGenerating}
+                className="px-4 py-3 min-h-[44px] bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-white rounded transition-colors flex items-center justify-center"
               >
-                {loading ? <Loader size="small" /> : 'Beautify Code'}
+                {isGenerating ? <Loader size="small" /> : 'Beautify Code'}
               </button>
             </div>
           </div>
@@ -244,15 +247,14 @@ end`,
             </div>
 
             <div className={`border ${isDark ? 'border-gray-600' : 'border-gray-300'} rounded-lg overflow-hidden`} style={{ height: '500px' }}>
-              {loading ? (
+              {isGenerating ? (
                 <div className="flex justify-center items-center h-full">
                   <Loader />
                 </div>
               ) : beautifiedCode ? (
-                <div className={`h-full overflow-y-auto p-4 ${isDark ? 'bg-gray-800' : 'bg-gray-50'}`}>
+                <div className={`h-full overflow-y-auto p-4 ${isDark ? 'bg-gray-800 text-white' : 'bg-gray-50 text-gray-800'}`}>
                   <Markdown
                     rehypePlugins={[rehypeHighlight]}
-                    className={isDark ? 'text-white' : 'text-gray-800'}
                   >
                     {beautifiedCode}
                   </Markdown>
