@@ -50,6 +50,7 @@ end`,
   const [language, setLanguage] = useState('JavaScript');
   const [testCases, setTestCases] = useState('');
   const [loading, setLoading] = useState(true);
+  const [isGenerating, setIsGenerating] = useState(false);
   const { isDark } = useTheme();
 
   const languages = ["JavaScript", "Python", "Java", "C++", "C#", "PHP", "Go", "Ruby"];
@@ -60,7 +61,7 @@ end`,
       return;
     }
 
-    setLoading(true);
+    setIsGenerating(true);
     try {
       const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/ai/generate-test-cases`, {
         code,
@@ -73,7 +74,7 @@ end`,
       console.error('Error generating test cases:', error);
       toast.error('Failed to generate test cases. Please try again.');
     } finally {
-      setLoading(false);
+      setIsGenerating(false);
     }
   };
 
@@ -198,10 +199,10 @@ end`,
               </button>
               <button
                 onClick={generateTestCases}
-                disabled={loading}
-                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded transition-colors flex items-center"
+                disabled={isGenerating}
+                className="px-4 py-3 min-h-[44px] bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white rounded transition-colors flex items-center justify-center"
               >
-                {loading ? <Loader size="small" /> : 'Generate Test Cases'}
+                {isGenerating ? <Loader size="small" /> : 'Generate Test Cases'}
               </button>
             </div>
           </div>
@@ -227,15 +228,14 @@ end`,
             </div>
 
             <div className={`border ${isDark ? 'border-gray-600' : 'border-gray-300'} rounded-lg overflow-hidden`} style={{ height: '500px' }}>
-              {loading ? (
+              {isGenerating ? (
                 <div className="flex justify-center items-center h-full">
                   <Loader />
                 </div>
               ) : testCases ? (
-                <div className={`h-full overflow-y-auto p-4 ${isDark ? 'bg-gray-800' : 'bg-gray-50'}`}>
+                <div className={`h-full overflow-y-auto p-4 ${isDark ? 'bg-gray-800 text-white' : 'bg-gray-50 text-gray-800'}`}>
                   <Markdown
                     rehypePlugins={[rehypeHighlight]}
-                    className={isDark ? 'text-white' : 'text-gray-800'}
                   >
                     {testCases}
                   </Markdown>
