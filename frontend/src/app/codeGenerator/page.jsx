@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { FaCode, FaLightbulb } from 'react-icons/fa';
 import CodeEditor from '../../components/CodeEditor';
 import Loader from '../../components/Loader';
 import { useTheme } from '../../context/ThemeContext';
@@ -31,12 +32,30 @@ function CodeGenerator() {
   }
 
   return (
-    <>
-      <div className='w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8'>
-        <CodeEditor URL={URL} prompt={prompt} />
+    <div className={`min-h-screen w-full ${isDark ? 'bg-gray-800' : 'bg-gray-100'}`}>
+      <div className="container mx-auto px-4 py-8">
+        {/* Header Section */}
+        <div className="mb-6">
+          <div className="flex flex-col md:flex-row justify-between items-center mb-4">
+            <div className="flex items-center mb-4 md:mb-0">
+              <FaCode className="text-green-400 text-2xl mr-2" />
+              <h1 className={`text-2xl md:text-3xl font-bold ${isDark ? 'text-white' : 'text-gray-800'}`}>
+                CodeHelp Code Generator
+              </h1>
+            </div>
+          </div>
+          <p className={`text-lg ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+            Generate code from your natural language descriptions.
+          </p>
+        </div>
+
+        {/* Code Editor */}
+        <div className="bg-gray-700 rounded-lg shadow-xl overflow-hidden">
+          <CodeEditor URL={URL} prompt={prompt} />
+        </div>
       </div>
       <BackToTopButton />
-    </>
+    </div>
   );
 }
 

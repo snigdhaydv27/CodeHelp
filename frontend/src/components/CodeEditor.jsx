@@ -68,53 +68,6 @@ function CodeEditor(props) {
     throw lastError;
   };
 
-  /**
-   * Extract and format complexity metrics from AI response
-   * Ensures Time Complexity and Space Complexity are prominently displayed
-   */
-  const formatComplexityResponse = (response) => {
-    if (!response) return '';
-    
-    // Extract Time Complexity line
-    const timeComplexityMatch = response.match(/Time Complexity:\s*([^\n]+)/i);
-    const timeComplexity = timeComplexityMatch ? timeComplexityMatch[1].trim() : 'Not found';
-    
-    // Extract Space Complexity line
-    const spaceComplexityMatch = response.match(/Space Complexity:\s*([^\n]+)/i);
-    const spaceComplexity = spaceComplexityMatch ? spaceComplexityMatch[1].trim() : 'Not found';
-    
-    // Extract the rest of the explanation (everything after the complexity lines)
-    const explanationStart = response.search(/(?:Then explain|Explanation|Analysis):|after the metrics/i);
-    let explanation = '';
-    if (explanationStart !== -1) {
-      explanation = response.substring(explanationStart).replace(/^(Then explain|Explanation|Analysis):\s*/, '').trim();
-    } else {
-      // If no explicit explanation marker, take everything after the Space Complexity line
-      const spaceComplexityIndex = response.indexOf('Space Complexity:');
-      if (spaceComplexityIndex !== -1) {
-        const afterSpaceComplexity = response.substring(spaceComplexityIndex + 'Space Complexity:'.length);
-        const afterFirstLine = afterSpaceComplexity.indexOf('\n');
-        if (afterFirstLine !== -1) {
-          explanation = afterSpaceComplexity.substring(afterFirstLine).trim();
-        }
-      }
-    }
-    
-    // Format the output
-    const formatted = `## Complexity Analysis
-
-### Time Complexity
-${timeComplexity}
-
-### Space Complexity
-${spaceComplexity}
-
-### Explanation
-${explanation || 'No additional explanation provided'}`;
-    
-    return formatted;
-  };
-
   const { isDark: isDarkMode } = useTheme();
 
   // Language mapping for Monaco Editor
@@ -227,14 +180,7 @@ ${explanation || 'No additional explanation provided'}`;
       const response = await retryWithBackoff(() => 
         axios.post(URL, { prompt })
       );
-      
-      // Check if this is a complexity analysis and apply special formatting
-      if (URL.includes('get-complexity')) {
-        setReview(formatComplexityResponse(response.data));
-      } else {
-        setReview(response.data);
-      }
-      
+      setReview(response.data);
       extractRecommendedFix(response.data);
       toast.success("Code review completed!");
       
