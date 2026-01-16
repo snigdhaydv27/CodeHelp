@@ -411,8 +411,8 @@ function ContentSummarizer() {
                 <div className="flex items-start">
                   <FaLightbulb className="text-yellow-400 mt-1 mr-3 flex-shrink-0" />
                   <div>
-                    <h3 className="font-medium mb-2">Tips for Better Summaries</h3>
-                    <ul className="list-disc pl-5 space-y-1 text-sm">
+                    <h3 className={`font-medium mb-2 ${isDark ? 'text-gray-100' : 'text-gray-800'}`}>Tips for Better Summaries</h3>
+                    <ul className={`list-disc pl-5 space-y-1 text-sm ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
                       {inputType === 'file' && (
                         <>
                           <li>Use clear, high-resolution images for better text extraction</li>
@@ -454,19 +454,19 @@ function ContentSummarizer() {
           <div className="flex items-start">
             <FaInfoCircle className="text-blue-400 mt-1 mr-3 flex-shrink-0" />
             <div>
-              <h3 className="font-medium mb-2">About Content Summarizer</h3>
-              <p className="mb-3">
+              <h3 className={`font-medium mb-2 ${isDark ? 'text-gray-100' : 'text-gray-800'}`}>About Content Summarizer</h3>
+              <p className={`mb-3 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
                 The Content Summarizer uses advanced AI to extract and summarize information from various sources:
               </p>
-              <ul className="list-disc pl-5 space-y-1">
-                <li><strong>File Upload:</strong></li>
-                <ul className="list-circle pl-5 space-y-1">
-                  <li><strong>Images:</strong> Extracts and summarizes text from images using OCR technology</li>
-                  <li><strong>PDFs:</strong> Analyzes document content and provides concise summaries</li>
-                  <li><strong>Text Files:</strong> Processes and condenses text files into key points</li>
+              <ul className={`list-disc pl-5 space-y-1 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                <li><strong className={isDark ? 'text-gray-200' : 'text-gray-800'}>File Upload:</strong></li>
+                <ul className={`list-circle pl-5 space-y-1 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                  <li><strong className={isDark ? 'text-gray-200' : 'text-gray-800'}>Images:</strong> Extracts and summarizes text from images using OCR technology</li>
+                  <li><strong className={isDark ? 'text-gray-200' : 'text-gray-800'}>PDFs:</strong> Analyzes document content and provides concise summaries</li>
+                  <li><strong className={isDark ? 'text-gray-200' : 'text-gray-800'}>Text Files:</strong> Processes and condenses text files into key points</li>
                 </ul>
-                <li><strong>Direct Text Input:</strong> Analyzes and summarizes text entered directly into the application</li>
-                <li><strong>YouTube Videos:</strong> Extracts information from YouTube videos and provides summaries</li>
+                <li><strong className={isDark ? 'text-gray-200' : 'text-gray-800'}>Direct Text Input:</strong> Analyzes and summarizes text entered directly into the application</li>
+                <li><strong className={isDark ? 'text-gray-200' : 'text-gray-800'}>YouTube Videos:</strong> Extracts information from YouTube videos and provides summaries</li>
               </ul>
             </div>
           </div>

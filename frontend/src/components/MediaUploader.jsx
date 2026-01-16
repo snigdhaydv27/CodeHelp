@@ -151,7 +151,7 @@ const MediaUploader = ({ onFileSelect }) => {
         return (
           <div className={`mt-4 p-4 rounded-lg flex items-center ${isDark ? 'bg-gray-700' : 'bg-gray-100'}`}>
             <FaFilePdf size={24} className="text-red-500 mr-2" />
-            <span className="truncate">{preview.name}</span>
+            <span className={`truncate ${isDark ? 'text-gray-200' : 'text-gray-800'}`}>{preview.name}</span>
           </div>
         );
       case 'video':
@@ -169,7 +169,7 @@ const MediaUploader = ({ onFileSelect }) => {
       case 'text':
         return (
           <div className={`mt-4 p-4 rounded-lg ${isDark ? 'bg-gray-700' : 'bg-gray-100'}`}>
-            <pre className="whitespace-pre-wrap text-sm overflow-auto max-h-40">
+            <pre className={`whitespace-pre-wrap text-sm overflow-auto max-h-40 ${isDark ? 'text-gray-200' : 'text-gray-800'}`}>
               {preview.content}
             </pre>
           </div>
@@ -201,8 +201,8 @@ const MediaUploader = ({ onFileSelect }) => {
           />
           <label htmlFor="file-input" className="cursor-pointer block">
             <div className="flex flex-col items-center justify-center">
-              <FaFileUpload size={40} />
-              <p className="mt-4 text-lg font-medium">
+              <FaFileUpload size={40} className={isDark ? 'text-gray-400' : 'text-gray-600'} />
+              <p className={`mt-4 text-lg font-medium ${isDark ? 'text-gray-200' : 'text-gray-800'}`}>
                 {isDragActive 
                   ? 'Drop the file here' 
                   : 'Drag & drop a file here, or click to select'}
@@ -219,7 +219,7 @@ const MediaUploader = ({ onFileSelect }) => {
             <div className="flex items-center">
               {renderFileIcon()}
               <div className="ml-3">
-                <p className="font-medium truncate max-w-xs">{file.name}</p>
+                <p className={`font-medium truncate max-w-xs ${isDark ? 'text-gray-200' : 'text-gray-800'}`}>{file.name}</p>
                 <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
                   {(file.size / 1024).toFixed(2)} KB
                 </p>

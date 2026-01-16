@@ -131,45 +131,45 @@ const SummaryDisplay = ({ summary, loading, error }) => {
       <div 
         className={`p-4 overflow-y-auto ${
           expanded ? 'max-h-[80vh]' : 'max-h-96'
-        }`}
+        } ${isDark ? 'text-gray-100' : 'text-gray-900'}`}
       >
         <Markdown
           rehypePlugins={[rehypeHighlight]}
           components={{
             p: ({ node, ...props }) => (
-              <p {...props} className="mb-4" />
+              <p {...props} className={`mb-4 ${isDark ? 'text-gray-200' : 'text-gray-900'}`} />
             ),
             h1: ({ node, ...props }) => (
-              <h1 {...props} className="text-2xl font-bold mb-4" />
+              <h1 {...props} className={`text-2xl font-bold mb-4 ${isDark ? 'text-gray-100' : 'text-gray-900'}`} />
             ),
             h2: ({ node, ...props }) => (
-              <h2 {...props} className="text-xl font-bold mb-3" />
+              <h2 {...props} className={`text-xl font-bold mb-3 ${isDark ? 'text-gray-100' : 'text-gray-900'}`} />
             ),
             h3: ({ node, ...props }) => (
-              <h3 {...props} className="text-lg font-bold mb-2" />
+              <h3 {...props} className={`text-lg font-bold mb-2 ${isDark ? 'text-gray-100' : 'text-gray-900'}`} />
             ),
             ul: ({ node, ...props }) => (
-              <ul {...props} className="list-disc pl-5 mb-4" />
+              <ul {...props} className={`list-disc pl-5 mb-4 ${isDark ? 'text-gray-200' : 'text-gray-900'}`} />
             ),
             ol: ({ node, ...props }) => (
-              <ol {...props} className="list-decimal pl-5 mb-4" />
+              <ol {...props} className={`list-decimal pl-5 mb-4 ${isDark ? 'text-gray-200' : 'text-gray-900'}`} />
             ),
             li: ({ node, ...props }) => (
-              <li {...props} className="mb-1" />
+              <li {...props} className={`mb-1 ${isDark ? 'text-gray-200' : 'text-gray-900'}`} />
             ),
             blockquote: ({ node, ...props }) => (
               <blockquote 
                 {...props} 
                 className={`border-l-4 pl-4 italic my-4 ${
-                  isDark ? 'border-gray-600 text-gray-400' : 'border-gray-300 text-gray-600'
+                  isDark ? 'border-gray-600 text-gray-300' : 'border-gray-300 text-gray-700'
                 }`} 
               />
             ),
             code: ({ node, inline, ...props }) => (
               inline 
-                ? <code {...props} className={`px-1 py-0.5 rounded ${isDark ? 'bg-gray-700' : 'bg-gray-100'}`} />
-                : <pre {...props} className={`p-4 rounded-lg my-4 overflow-auto ${isDark ? 'bg-gray-900' : 'bg-gray-100'}`}>
-                    <code {...props} />
+                ? <code {...props} className={`px-1 py-0.5 rounded font-mono ${isDark ? 'bg-gray-700 text-gray-100' : 'bg-gray-100 text-gray-900'}`} />
+                : <pre {...props} className={`p-4 rounded-lg my-4 overflow-auto ${isDark ? 'bg-gray-900 text-gray-100' : 'bg-gray-100 text-gray-900'}`}>
+                    <code {...props} className={isDark ? 'text-gray-100' : 'text-gray-900'} />
                   </pre>
             )
           }}
