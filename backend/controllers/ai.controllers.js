@@ -114,6 +114,60 @@ const codeMetricsAnalyzer = async (req, res) => {
 const explainCode = (req, res) =>
   handleRequest(req, res, aiService.generateExplanation, ["code", "language"]);
 
+const summarizeContent = async (req, res) => {
+  try {
+    // Handle both file upload (FormData) and regular JSON
+    let content = req.body?.content;
+    const summaryLength = req.body?.summaryLength || 'medium';
+    const summaryType = req.body?.summaryType || 'general';
+    
+    // If it's a file upload, extract text from file
+    if (req.file) {
+      // For now, just use file name as placeholder
+      // You can add PDF/file parsing logic here
+      content = req.file.originalname;
+    }
+    
+    if (!content) {
+      return res.status(400).json({ error: "Content is required" });
+    }
+    
+    const result = await aiService.summarizeContent(content, summaryLength, summaryType);
+    res.json(result);
+  } catch (err) {
+    console.error('Error in summarizeContent:', err);
+    res.status(500).json({ error: err.message });
+  }
+};
+
+const summarizeText = async (req, res) => {
+  try {
+    const { text, summaryLength = 'medium', summaryType = 'general' } = req.body;
+    if (!text) {
+      return res.status(400).json({ error: "Text is required" });
+    }
+    const result = await aiService.summarizeText(text, summaryLength, summaryType);
+    res.json(result);
+  } catch (err) {
+    console.error('Error in summarizeText:', err);
+    res.status(500).json({ error: err.message });
+  }
+};
+
+const summarizeYoutube = async (req, res) => {
+  try {
+    const { youtubeUrl, summaryLength = 'medium', summaryType = 'general' } = req.body;
+    if (!youtubeUrl) {
+      return res.status(400).json({ error: "YouTube URL is required" });
+    }
+    const result = await aiService.summarizeYoutube(youtubeUrl, summaryLength, summaryType);
+    res.json(result);
+  } catch (err) {
+    console.error('Error in summarizeYoutube:', err);
+    res.status(500).json({ error: err.message });
+  }
+};
+
 module.exports = {
   getReview,
   getCode,
@@ -127,4 +181,7 @@ module.exports = {
   scanDependencies, 
   codeMetricsAnalyzer, 
   explainCode,
+  summarizeContent,
+  summarizeText,
+  summarizeYoutube,
 };

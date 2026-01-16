@@ -184,6 +184,30 @@ async function summarizeContent(prompt) {
   return cleanAIResponse(result);
 }
 
+async function summarizeText(text, summaryLength = 'medium', summaryType = 'general') {
+  const lengthGuide = {
+    short: '2-3 sentences',
+    medium: '3-5 sentences',
+    long: '5-8 sentences'
+  };
+  
+  const prompt = `Please provide a ${summaryType} summary of the following text in approximately ${lengthGuide[summaryLength] || lengthGuide.medium}:\n\n${text}`;
+  const result = await retryWithBackoff(() =>
+    makeOpenRouterRequest('You are an expert summarizer. Create concise, accurate summaries that capture the key information.', prompt)
+  );
+  return { summary: cleanAIResponse(result), type: summaryType, length: summaryLength };
+}
+
+async function summarizeYoutube(youtubeUrl, summaryLength = 'medium', summaryType = 'general') {
+  // This would typically extract transcript from YouTube video
+  // For now, return a placeholder message
+  const prompt = `Extract and summarize the content from this YouTube video: ${youtubeUrl}. Summary length: ${summaryLength}, Summary type: ${summaryType}`;
+  const result = await retryWithBackoff(() =>
+    makeOpenRouterRequest('You are an expert summarizer. Create concise, accurate summaries of video content.', prompt)
+  );
+  return { summary: cleanAIResponse(result), type: summaryType, length: summaryLength, source: 'youtube' };
+}
+
 module.exports = {
   generateReview,
   generateCode,
@@ -197,5 +221,7 @@ module.exports = {
   scanDependencies,
   codeMetricsAnalyzer,
   generateExplanation,
-  summarizeContent
+  summarizeContent,
+  summarizeText,
+  summarizeYoutube
 };
